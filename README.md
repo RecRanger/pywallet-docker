@@ -26,7 +26,7 @@ This command builds an image named `pywallet-image` using the Dockerfile in the 
 To run the `pywallet` application within the Docker container, use the following command:
 
 ```bash
-docker run --rm pywallet-image [arguments]
+docker run --rm -it pywallet-image [arguments]
 ```
 
 Replace `[arguments]` with the actual arguments you want to pass to `pywallet.py`.
@@ -38,7 +38,7 @@ Replace `[arguments]` with the actual arguments you want to pass to `pywallet.py
 To display the help information for `pywallet.py`, run:
 
 ```bash
-docker run --rm pywallet-image --help
+docker run --rm -it pywallet-image --help
 ```
 
 ### Working with Local Files
@@ -46,7 +46,7 @@ docker run --rm pywallet-image --help
 If you need to work with wallet files located on your local file system, you must mount the directory containing the files into the Docker container. Use the following command structure:
 
 ```bash
-docker run --rm -v /path/to/local/directory:/pywallet/data pywallet-image --datadir=/pywallet/data --dumpwallet
+docker run --rm -it -v /path/to/local/directory:/pywallet/data pywallet-image --datadir=/pywallet/data --dumpwallet
 ```
 
 Replace `/path/to/local/directory` with the path to the directory on your local machine where your wallet files are stored.
@@ -56,10 +56,16 @@ Replace `/path/to/local/directory` with the path to the directory on your local 
 To recover a wallet using a wallet.dat file located on your local system:
 
 ```bash
-docker run --rm -v /path/to/local/directory:/pywallet/data pywallet-image --datadir=/pywallet/data --recover --recov_device=/pywallet/data/wallet.dat --recov_size=20Mio
+docker run --rm -it -v /path/to/local/directory:/pywallet/data pywallet-image --datadir=/pywallet/data --recover --recov_device=/pywallet/data/wallet.dat --recov_size=20Mio
 ```
 
 Make sure to replace `/path/to/local/directory` with the actual path where your `wallet.dat` file is stored and adjust the `--recov_size` argument according to the estimated size of your wallet.
+
+### Run the Unit Tests
+
+```bash
+docker run --rm -it pywallet-image --tests
+```
 
 ## Notes
 
