@@ -11,6 +11,9 @@ RUN apt-get update && \
 # Clone the pywallet repository
 RUN git clone https://github.com/jackjack-jj/pywallet /pywallet
 
+RUN apt-get install -y python-pip
+RUN pip install pycryptodome
+
 # Set the working directory to /pywallet
 WORKDIR /pywallet
 
